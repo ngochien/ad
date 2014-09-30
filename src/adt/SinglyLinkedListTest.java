@@ -53,6 +53,9 @@ public class SinglyLinkedListTest {
 		assertEquals(0, list.find(1000));
 		assertEquals(1, list.find(0));
 		assertEquals(100, list.find(99));
+
+		list.insert(list.size(), 2000);
+		assertEquals(list.size(), list.find(2000));
 	}
 
 	/**
