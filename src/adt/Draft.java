@@ -8,6 +8,7 @@
 package adt;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class Draft {
 		for (int i = 0; i < 1; i++) {
 			System.out.println(i);
 		}
-		List<String> l = null;
+		List<String> l = new LinkedList<>();
 		ArrayList<String> ar;
 		// System.out.println(l.equals(null));
 		SinglyLinkedList<String> sl = new SinglyLinkedList<>();

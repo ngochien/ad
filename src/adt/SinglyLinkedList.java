@@ -95,16 +95,16 @@ public class SinglyLinkedList<E> implements List<E> {
 	@Override
 	public int find(E element) {
 		if (element == null) {
-			throw new NullPointerException("element is null");
+			throw new NullPointerException("Element is null");
 		}
 
 		System.out.print("FIND an element - ");
 
 		int index = 0;
 
-		for (Node<E> node = head; node != null; node = node.next) {
-			if (node.element.equals(element)) {
-				System.out.println("Number of list accesses: " + index);
+		for (Node<E> x = head; x != null; x = x.next) {
+			if (x.element.equals(element)) {
+				System.out.println("Number of operations : " + index);
 				return index;
 			}
 			index++;
@@ -151,40 +151,22 @@ public class SinglyLinkedList<E> implements List<E> {
 	 * @see adt.List#concat(adt.List)
 	 */
 	@Override
-	public List<E> concat(List<E> otherList) {
+	public void concat(List<E> otherList) {
 		if (otherList == null) {
 			throw new NullPointerException("otherList is null");
 		}
 
-		if (!(otherList instanceof SinglyLinkedList<?>)) {
-			throw new IllegalArgumentException();
-		}
-
 		System.out.print("CONCAT - ");
-
-		return concat((SinglyLinkedList<E>) otherList);
 	}
 
-	private SinglyLinkedList<E> concat(SinglyLinkedList<E> otherList) {
-		// assert otherList != null
-
-		SinglyLinkedList<E> newList;
-
-		int diff = this.size - otherList.size;
-		if (diff < 0) {
-			newList = this;
-			this.node(size-1).next = otherList.head;
-		} else {
-			newList = otherList;
-			otherList.node(otherList.size - 1).next = this.head;
+	private Object[] toArray() {
+		Object[] result = new Object[size];
+		int i = 0;
+		for (Node<E> x = head; x != null; x = x.next) {
+			result[i++] = x.element;
 		}
-
-		return newList;
-	}
-
-	@Override
-	public String toString() {
-		return null;
+		System.out.println("Number of operations :" + i);
+		return result;
 	}
 
 	private static class Node<E> {
@@ -192,6 +174,9 @@ public class SinglyLinkedList<E> implements List<E> {
 		Node<E> next;
 
 		Node(E element) {
+			if (element == null) {
+				throw new NullPointerException("Element is null");
+			}
 			this.element = element;
 			this.next = null;
 		}

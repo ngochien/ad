@@ -24,5 +24,5 @@ public interface List<E> {
 
 	E retrieve(int index);
 
-	List<E> concat(List<E> otherList);
+	void concat(List<E> otherList);
 }
