@@ -83,7 +83,7 @@ public class SinglyLinkedListTest {
 	}
 
 	/**
-	 * Test method for {@link adt.SinglyLinkedList#concat(adt.List)}.
+	 * Test method for {@link adt.SinglyLinkedList#concat1(adt.List)}.
 	 */
 	@Test
 	public void testConcat() {

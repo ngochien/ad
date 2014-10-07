@@ -20,38 +20,21 @@ public class SinglyLinkedList<E> implements List<E> {
 	public SinglyLinkedList() {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see adt.List#size()
-	 */
 	@Override
 	public int size() {
 		return size;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see adt.List#isEmpty()
-	 */
 	@Override
 	public boolean isEmpty() {
 		return head == null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see adt.List#insert(int, java.lang.Object) // linkBefore(), add(int)
-	 */
 	@Override
 	public void insert(int index, E element) {
 		if (index < 0 || index > size) {
-			throw new IndexOutOfBoundsException("Invalid index: " + index + "Size: " + size);
+			throw new IndexOutOfBoundsException("Invalid index: " + index + " Size: " + size);
 		}
-
-		System.out.print("INSERT an element at position " + index + " - ");
 
 		Node<E> newNode = new Node<E>(element);
 		if (isEmpty()) {
@@ -60,6 +43,7 @@ public class SinglyLinkedList<E> implements List<E> {
 			newNode.next = head;
 			head = newNode;
 		} else {
+			System.out.print("INSERT an element at position " + index + " - ");
 			Node<E> node = node(index - 1);
 			newNode.next = node.next;
 			node.next = newNode;
@@ -67,31 +51,20 @@ public class SinglyLinkedList<E> implements List<E> {
 		size++;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see adt.List#delete(int)
-	 */
 	@Override
 	public void delete(int index) {
 		checkElementIndex(index);
 
-		System.out.print("DELETE element at position " + index + " - ");
-
 		if (index == 0) {
 			head = head.next;
 		} else {
+			System.out.print("DELETE element at position " + index + " - ");
 			Node<E> node = node(index - 1);
 			node.next = node.next.next;
 		}
 		size--;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see adt.List#find(java.lang.Object) // indexOf()
-	 */
 	@Override
 	public int find(E element) {
 		if (element == null) {
@@ -101,10 +74,9 @@ public class SinglyLinkedList<E> implements List<E> {
 		System.out.print("FIND an element - ");
 
 		int index = 0;
-
 		for (Node<E> x = head; x != null; x = x.next) {
 			if (x.element.equals(element)) {
-				System.out.println("Number of operations : " + index);
+				System.out.println(index + " operations");
 				return index;
 			}
 			index++;
@@ -112,11 +84,6 @@ public class SinglyLinkedList<E> implements List<E> {
 		return -1;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see adt.List#retrieve(int) // get(int)
-	 */
 	@Override
 	public E retrieve(int index) {
 		checkElementIndex(index);
@@ -130,12 +97,12 @@ public class SinglyLinkedList<E> implements List<E> {
 		// assert index >= 0 && index < size
 
 		Node<E> node = head;
-		int counter = 1;
+		int numOfOperations = 0;
 		for (int i = 0; i < index; i++) {
 			node = node.next;
-			counter++;
+			numOfOperations++;
 		}
-		System.out.println("Number of list accesses: " + counter);
+		System.out.println(numOfOperations + " Operations");
 		return node;
 	}
 
@@ -145,18 +112,46 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see adt.List#concat(adt.List)
-	 */
 	@Override
 	public void concat(List<E> otherList) {
 		if (otherList == null) {
 			throw new NullPointerException("otherList is null");
 		}
+		if (!(otherList instanceof SinglyLinkedList<?>)) {
+			throw new IllegalArgumentException("Not supported");
+		}
 
-		System.out.print("CONCAT - ");
+		if (!otherList.isEmpty()) {
+			Node<E> x = ((SinglyLinkedList<E>) otherList).head;
+			if (isEmpty()) {
+				head = x;
+			} else {
+				node(size - 1).next = x;
+			}
+			size += otherList.size();
+		}
+
+	}
+
+	public void concat1(List<E> otherList) {
+		if (otherList == null) {
+			throw new NullPointerException("otherList is null");
+		}
+
+		if (!otherList.isEmpty()) {
+			Node<E> x = new Node<E>(otherList.retrieve(0));
+			Node<E> pointer = x;
+			for (int i = 0; i < otherList.size() - 1; i++) {
+				pointer.next = new Node<E>(otherList.retrieve(i + 1));
+				pointer = pointer.next;
+			}
+			if (isEmpty()) {
+				head = x;
+			} else {
+				node(size - 1).next = x;
+			}
+			size += otherList.size();
+		}
 	}
 
 	private Object[] toArray() {
