@@ -60,7 +60,6 @@ public class Algebra {
 				stack.push(a[i] + "");
 			}
 		}
-
 		return Integer.parseInt(stack.top());
 	}
 }

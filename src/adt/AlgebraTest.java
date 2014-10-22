@@ -15,6 +15,7 @@ import org.junit.Test;
  *
  *
  * @author Le
+ * @author Nguyen
  */
 public class AlgebraTest {
 

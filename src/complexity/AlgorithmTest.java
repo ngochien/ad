@@ -8,29 +8,34 @@
 package complexity;
 
 /**
- *
- *
  * @author Le
+ * @author Nguyen
  */
 public class AlgorithmTest {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// for (int i = 1; i <= 100; i++) {
-		// // System.out.print(i + " - ");
-		// Algorithm.bruteforceFindPrimeNumber(i);
-		// }
 
-		// Algorithm.problem_rekursiv(536);
-		// System.out.println(Algorithm.counter);
-		// Algorithm.problem_rekursiv(17);
+		System.out.format("%25s%20s%20s\n", "Methode", "Problemgröße", "Aufwand");
 
-		System.out.println(Algorithm.sum(100));
-		System.out.println(Algorithm.counter);
+		System.out.println("-----------------------------------------------------------------");
+		for (int i = 1; i <= 35000; i*=2) {
+			Algorithm.simpleTrialDivision(i);
+		}
 
-		System.out.println(Math.log10(4956));
+		System.out.println("-----------------------------------------------------------------");
+		for (int i = 1; i <= 35000; i *= 2) {
+			Algorithm.improvedTrialDivision(i);
+		}
+
+		System.out.println("-----------------------------------------------------------------");
+		for (int i = 1; i <= 35000; i *= 2) {
+			Algorithm.sieb(i);
+		}
+
+		System.out.println("-----------------------------------------------------------------");
+		for (int i = 1; i <= 35000; i *= 2) {
+			Algorithm.isPrime(i);
+		}
 	}
 
 }

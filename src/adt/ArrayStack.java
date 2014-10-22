@@ -59,6 +59,8 @@ public class ArrayStack<E> implements Stack<E> {
 	/**
 	 * Legt das gegebene Element auf das oberste Ende des Stacks.
 	 *
+	 * Komplexität: O(1)
+	 *
 	 * @param element das einzufügende Element.
 	 * @throws NullPointerException falls das gegebene Element <tt>null</tt> ist.
 	 * @throws IndexOutOfBoundsException falls der Stack voll ist.
@@ -79,6 +81,8 @@ public class ArrayStack<E> implements Stack<E> {
 	/**
 	 * Entnimmt das oberste Element des Stacks.
 	 *
+	 * Komplexität: O(1)
+	 *
 	 * @throws IndexOutOfBoundsException falls der Stack leer ist.
 	 */
 	@Override
@@ -92,6 +96,8 @@ public class ArrayStack<E> implements Stack<E> {
 	/**
 	 * Entnimmt das oberste Element des Stacks und liefert das herausgenommene Element zurück.
 	 *
+	 * Komplexität: O(1)
+	 * 
 	 * @throws IndexOutOfBoundsException falls der Stack leer ist.
 	 * @return das oberste Element des Stacks.
 	 */
