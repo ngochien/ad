@@ -12,6 +12,7 @@ package adt;
  * Größe, die beim Erzeugen des Stacks angegeben werden muss.
  *
  * @author Le
+ * @author Nguyen
  */
 public class ArrayStack<E> implements Stack<E> {
 
@@ -26,7 +27,9 @@ public class ArrayStack<E> implements Stack<E> {
 	private int topIndex;
 
 	/**
-	 * @param max
+	 * Erzeugt einen leerten Stack mit der angegebenen maximalen Größe.
+	 *
+	 * @param max maximale Größe des Stacks.
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayStack(int max) {
@@ -50,7 +53,7 @@ public class ArrayStack<E> implements Stack<E> {
 	 * @return
 	 */
 	public boolean isFull() {
-		return topIndex >= elements.length - 1;
+		return topIndex >= elements.length;
 	}
 
 	/**

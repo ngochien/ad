@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Testfälle für die Klasse SinglyLinkedList (einfach verkettete Liste).
+ * Testfälle für die Klasse <tt>SinglyLinkedList</tt> (einfach verkettete Liste).
  *
  * @author Le
  * @author Nguyen
