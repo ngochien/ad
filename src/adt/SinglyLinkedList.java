@@ -8,27 +8,64 @@
 package adt;
 
 /**
+ * Einfach verkettete Liste, deren Elemente nicht <tt>null</tt> sein dürfen.
+ * Bei allen Operationen werden einfach verketteten Listen immer vom Anfang
+ * bis zu einer bestimmten Position durchgelaufen.
+ *
+ * @param <E> der Grundtyp von Elementen in dieser Liste.
+ *
  * @author Le
+ * @author Nguyen
  */
 public class SinglyLinkedList<E> implements List<E> {
 
 	private int size = 0;
 
+	/**
+	 * Zeiger auf den ersten Knoten von dieser Liste.
+	 */
 	private Node<E> head;
 
+	/**
+	 * Erzeugt eine leere Liste.
+	 */
 	public SinglyLinkedList() {
 	}
 
+	/**
+	 * Liefert Anzahl der Elementen in dieser Liste zurück.
+	 *
+	 * @return Anzahl der Elementen in dieser Liste.
+	 */
 	@Override
 	public int size() {
 		return size;
 	}
 
+	/**
+	 * Liefert <tt>true</tt> wenn diese Liste keine Elemente enthält.
+	 *
+	 * @return <tt>true</tt> wenn diese Liste keine Elemente enthält.
+	 */
 	@Override
 	public boolean isEmpty() {
-		return head == null;
+		return head == null && size == 0;
 	}
 
+	/**
+	 * Fügt das gegebene Element an der gegebenen Position in diese Liste ein. Das aktuelle Element an
+	 * dieser Position und alle folgenden Elemente werden nach rechts verschoben und ihre Indizes
+	 * erhöhen sich um eins.
+	 *
+	 * Komplexität: O(n), denn im schlimmsten Fall (Einfügen eines Elements am Ende der Liste) muss
+	 * diese Liste komplett vom Anfang bis zum Ende durchgelaufen werden.
+	 *
+	 * @param index die Position, an der das gegebene Element eingefügt wird.
+	 * @param element das einzufügende Element an der gegebenen Position.
+	 * @throws NullPointerException falls das gegebene Element <tt>null</tt> ist.
+	 * @throws IndexOutOfBoundsException falls die gegebene Position ungültig ist.
+	 *           <code>(index < 0 || index > size)</code>
+	 */
 	@Override
 	public void insert(int index, E element) {
 		if (index < 0 || index > size) {
@@ -42,7 +79,7 @@ public class SinglyLinkedList<E> implements List<E> {
 			newNode.next = head;
 			head = newNode;
 		} else {
-			System.out.print("INSERT an element at position " + index + " - ");
+			// System.out.print("INSERT an element at position " + index + " - ");
 			Node<E> node = node(index - 1);
 			newNode.next = node.next;
 			node.next = newNode;
@@ -50,6 +87,17 @@ public class SinglyLinkedList<E> implements List<E> {
 		size++;
 	}
 
+	/**
+	 * Löscht das Element an der gegebenen Position. Alle folgenden Elemente werden nach links
+	 * verschoben und ihre Indizes verringern sich um eins.
+	 *
+	 * Komplexität: O(n), denn im schlimmsten Fall (Löschen des letzten Elements der Liste) muss diese
+	 * Liste komplett vom Anfang bis zum Ende durchgelaufen werden.
+	 *
+	 * @param index die Position von dem zu löschenden Element.
+	 * @throws IndexOutOfBoundsException falls die gegebene Position ungültig ist.
+	 *           <code>(index < 0 || index >= size)</code>
+	 */
 	@Override
 	public void delete(int index) {
 		checkElementIndex(index);
@@ -57,25 +105,37 @@ public class SinglyLinkedList<E> implements List<E> {
 		if (index == 0) {
 			head = head.next;
 		} else {
-			System.out.print("DELETE element at position " + index + " - ");
+			// System.out.print("DELETE element at position " + index + " - ");
 			Node<E> node = node(index - 1);
 			node.next = node.next.next;
 		}
 		size--;
 	}
 
+	/**
+	 * Liefert die Position von dem ersten Vorkommen von dem gegebenen Element zurück. Falls diese
+	 * Liste das gegebene Element nicht enthält, liefert -1 zurück.
+	 *
+	 * Komplexität: O(n), denn im schlimmsten Fall (das gesuchte Element ist nicht vorhanden) muss
+	 * diese Liste komplett vom Anfang bis zum Ende durchgelaufen werden.
+	 *
+	 * @param element das zu findende Element.
+	 * @return die Position von dem ersten Vorkommen von dem gegebenen Element, oder -1, falls diese
+	 *         Liste das gegebene Element nicht enthält.
+	 * @throws NullPointerException falls das gegebene Element <tt>null</tt> ist.
+	 */
 	@Override
 	public int find(E element) {
 		if (element == null) {
 			throw new NullPointerException("Element is null");
 		}
 
-		System.out.print("FIND an element - ");
+		// System.out.print("FIND an element - ");
 
 		int index = 0;
 		for (Node<E> x = head; x != null; x = x.next) {
 			if (x.element.equals(element)) {
-				System.out.println(index + " operations");
+				// System.out.println(index + " operations");
 				return index;
 			}
 			index++;
@@ -83,67 +143,78 @@ public class SinglyLinkedList<E> implements List<E> {
 		return -1;
 	}
 
+	/**
+	 * Liefert das Element an der gegebenen Position zurück.
+	 *
+	 * Komplexität: O(n), denn im schlimmsten Fall (Finden des letzten Elements) muss diese Liste
+	 * komplett vom Anfang bis zum Ende durchgelaufen werden.
+	 *
+	 * @param index die Position von dem zu findende Element.
+	 * @return das Element an der gegebenen Position.
+	 * @throws IndexOutOfBoundsException falls die gegebene Position ungültig ist.
+	 *           <code>(index < 0 || index >= size)</code>
+	 */
 	@Override
 	public E retrieve(int index) {
 		checkElementIndex(index);
 
-		System.out.print("RETRIEVE element at position " + index + " - ");
+		// System.out.print("RETRIEVE element at position " + index + " - ");
 
 		return node(index).element;
 	}
 
+	/**
+	 * Liefert den Knoten an der gegebenen Position zurück.
+	 */
 	private Node<E> node(int index) {
 		// assert index >= 0 && index < size
 
 		Node<E> node = head;
-		int numOfOperations = 0;
-		for (int i = 0; i < index; i++) {
+		int counter = 0;
+		for (int i = 1; i <= index; i++) {
 			node = node.next;
-			numOfOperations++;
+			counter++;
 		}
-		System.out.println(numOfOperations + " Operations");
+		// System.out.println(counter + " Operations");
 		return node;
 	}
 
+	/**
+	 * Prüft ob die gegebene Position eine gültige Position von einem vorhandenen Element ist.
+	 */
 	private void checkElementIndex(int index) {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Invalid index: " + index + "Size: " + size);
 		}
 	}
 
+	/**
+	 * Hängt alle Elemente in der gegebenen Liste ans Ende dieser Liste an. Die Reihenfolge von
+	 * Elementen in der gegebenen Liste bleibt unverändert.
+	 *
+	 * Komplexität: O(n), denn diese Liste muss komplett vom Anfang bis zum Ende durchgelaufen werden.
+	 *
+	 * @param otherList die Liste, deren Elemente ans Ende dieser Liste angehängt werden.
+	 *
+	 */
 	@Override
 	public void concat(List<E> otherList) {
 		if (otherList == null) {
 			throw new NullPointerException("otherList is null");
 		}
-		if (!(otherList instanceof SinglyLinkedList<?>)) {
-			throw new IllegalArgumentException("Not supported");
+		if (this == otherList) {
+			throw new IllegalArgumentException("Cannot concat the same list");
 		}
 
 		if (!otherList.isEmpty()) {
-			Node<E> x = ((SinglyLinkedList<E>) otherList).head;
-			if (isEmpty()) {
-				head = x;
-			} else {
-				node(size - 1).next = x;
-			}
-			size += otherList.size();
-		}
-
-	}
-
-	public void concat1(List<E> otherList) {
-		if (otherList == null) {
-			throw new NullPointerException("otherList is null");
-		}
-
-		if (!otherList.isEmpty()) {
+			/* Bildet eine Knotenkette aus Elementen von dem gegebenen Liste. */
 			Node<E> x = new Node<E>(otherList.retrieve(0));
 			Node<E> pointer = x;
-			for (int i = 0; i < otherList.size() - 1; i++) {
-				pointer.next = new Node<E>(otherList.retrieve(i + 1));
+			for (int i = 1; i < otherList.size() - 1; i++) {
+				pointer.next = new Node<E>(otherList.retrieve(i));
 				pointer = pointer.next;
 			}
+			/* Hängt diese Knotenkette ans Ende dieser Liste. */
 			if (isEmpty()) {
 				head = x;
 			} else {
@@ -153,16 +224,9 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 	}
 
-	private Object[] toArray() {
-		Object[] result = new Object[size];
-		int i = 0;
-		for (Node<E> x = head; x != null; x = x.next) {
-			result[i++] = x.element;
-		}
-		System.out.println("Number of operations :" + i);
-		return result;
-	}
-
+	/**
+	 * Jeder Knoten enthält ein Element und einen Zeiger auf den nächsten Knoten.
+	 */
 	private static class Node<E> {
 		E element;
 		Node<E> next;
