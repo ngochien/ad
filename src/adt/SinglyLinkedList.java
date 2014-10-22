@@ -49,7 +49,7 @@ public class SinglyLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return head == null && size == 0;
+		return head == null && size <= 0;
 	}
 
 	/**

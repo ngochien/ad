@@ -26,24 +26,12 @@ public class ComplexityTest {
 		}
 
 		System.out.println("--------------------------------------------------------------");
-		for (int i = 1; i < 1024; i *= 2) {
+		for (int i = 1; i < 1024; i++) {
 			integerList.find(i);
 		}
 
 		System.out.println("--------------------------------------------------------------");
-		for (int i = 1; i < 1024; i *= 2) {
-			integerList.retrieve(i);
-		}
-
-		System.out.println("--------------------------------------------------------------");
-		List<Integer> otherList = new SinglyLinkedList<>();
-		for (int i = 0; i < 10; i++) {
-			otherList.insert(i, i);
-		}
-		integerList.concat(otherList);
-
-		System.out.println("--------------------------------------------------------------");
-		for (int i = 1; i < 1024; i *= 2) {
+		for (int i = 1; i < 1024; i++) {
 			integerList.delete(1023 - i);
 		}
 	}
