@@ -7,7 +7,6 @@
  */
 package adt;
 
-
 /**
  * @author Le
  */
