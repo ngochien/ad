@@ -72,14 +72,17 @@ public class SinglyLinkedList<E> implements List<E> {
 			throw new IndexOutOfBoundsException("Invalid index: " + index + " Size: " + size);
 		}
 
+		System.out.format("%10s%10s", "INSERT", index);
+
 		Node<E> newNode = new Node<E>(element);
 		if (isEmpty()) {
 			head = newNode;
+			System.out.format("%25s\n", 1);
 		} else if (index == 0) {
 			newNode.next = head;
 			head = newNode;
+			System.out.format("%25s\n", 1);
 		} else {
-			// System.out.print("INSERT an element at position " + index + " - ");
 			Node<E> node = node(index - 1);
 			newNode.next = node.next;
 			node.next = newNode;
@@ -102,10 +105,12 @@ public class SinglyLinkedList<E> implements List<E> {
 	public void delete(int index) {
 		checkElementIndex(index);
 
+		System.out.format("%10s%10s", "DELETE", index);
+
 		if (index == 0) {
 			head = head.next;
+			System.out.format("%25s\n", 1);
 		} else {
-			// System.out.print("DELETE element at position " + index + " - ");
 			Node<E> node = node(index - 1);
 			node.next = node.next.next;
 		}
@@ -130,16 +135,15 @@ public class SinglyLinkedList<E> implements List<E> {
 			throw new NullPointerException("Element is null");
 		}
 
-		// System.out.print("FIND an element - ");
-
 		int index = 0;
 		for (Node<E> x = head; x != null; x = x.next) {
 			if (x.element.equals(element)) {
-				// System.out.println(index + " operations");
+				System.out.format("%10s%10s%25s\n", "FIND", "", index);
 				return index;
 			}
 			index++;
 		}
+		System.out.format("%10s%10s%25s\n", "FIND", "", index);
 		return -1;
 	}
 
@@ -158,7 +162,7 @@ public class SinglyLinkedList<E> implements List<E> {
 	public E retrieve(int index) {
 		checkElementIndex(index);
 
-		// System.out.print("RETRIEVE element at position " + index + " - ");
+		System.out.format("%10s%10s", "RETRIEVE", index);
 
 		return node(index).element;
 	}
@@ -170,12 +174,12 @@ public class SinglyLinkedList<E> implements List<E> {
 		// assert index >= 0 && index < size
 
 		Node<E> node = head;
-		int counter = 0;
+		int counter = 1;
 		for (int i = 1; i <= index; i++) {
 			node = node.next;
 			counter++;
 		}
-		// System.out.println(counter + " Operations");
+		System.out.format("%25s\n", counter);
 		return node;
 	}
 
@@ -184,7 +188,7 @@ public class SinglyLinkedList<E> implements List<E> {
 	 */
 	private void checkElementIndex(int index) {
 		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException("Invalid index: " + index + "Size: " + size);
+			throw new IndexOutOfBoundsException("Invalid index: " + index + " Size: " + size);
 		}
 	}
 
@@ -195,7 +199,8 @@ public class SinglyLinkedList<E> implements List<E> {
 	 * Komplexität: O(n), denn diese Liste muss komplett vom Anfang bis zum Ende durchgelaufen werden.
 	 *
 	 * @param otherList die Liste, deren Elemente ans Ende dieser Liste angehängt werden.
-	 *
+	 * @throws NullPointerException falls die gegebene Liste <tt>null</tt> ist.
+	 * @throws IllegalArgumentException falls die gegebene List dieselbe Liste wie diese ist.
 	 */
 	@Override
 	public void concat(List<E> otherList) {
@@ -210,11 +215,12 @@ public class SinglyLinkedList<E> implements List<E> {
 			/* Bildet eine Knotenkette aus Elementen von dem gegebenen Liste. */
 			Node<E> x = new Node<E>(otherList.retrieve(0));
 			Node<E> pointer = x;
-			for (int i = 1; i < otherList.size() - 1; i++) {
+			for (int i = 1; i < otherList.size(); i++) {
 				pointer.next = new Node<E>(otherList.retrieve(i));
 				pointer = pointer.next;
 			}
 			/* Hängt diese Knotenkette ans Ende dieser Liste. */
+			System.out.format("%10s%10s", "CONCAT", "");
 			if (isEmpty()) {
 				head = x;
 			} else {
