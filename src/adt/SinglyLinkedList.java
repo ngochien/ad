@@ -212,7 +212,7 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 
 		if (!otherList.isEmpty()) {
-			/* Bildet eine Knotenkette aus Elementen von dem gegebenen Liste. */
+			/* Bildet eine Knotenkette aus Elementen von der gegebenen Liste. */
 			Node<E> x = new Node<E>(otherList.retrieve(0));
 			Node<E> pointer = x;
 			for (int i = 1; i < otherList.size(); i++) {

@@ -59,5 +59,16 @@ public class Draft {
 
 		l3.insert(0, "Hallo");
 		// l1.concat(l3); // error!
+
+		String s = "((2*(13-((9+6)*15)))-(8/(4-2)))";
+		String[] sa = s.split("[^0-9]+");
+		for (int i = 0; i < sa.length; i++) {
+			System.out.println(sa[i]);
+		}
+		System.out.println(sa.length);
+		System.out.println(sa[0].isEmpty());
+		for (String string : sa) {
+			System.out.println(string);
+		}
 	}
 }
