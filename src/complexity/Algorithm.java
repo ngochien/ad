@@ -13,7 +13,16 @@ package complexity;
  */
 public class Algorithm {
 
-	public static int counter = 0;
+	private static long counter = 0;
+	private static long[][] a;
+
+	public static void reset() {
+		counter = 0;
+	}
+
+	public static long getCount() {
+		return counter;
+	}
 
 	public static void simpleTrialDivision(int n) {
 		boolean isPrime[] = new boolean[n];
@@ -85,9 +94,8 @@ public class Algorithm {
 		return result;
 	}
 
-	public static int recursivePascal(int line, int column) {
+	public static long recursivePascal(int line, int column) {
 		if (column == 0 || column == line) {
-			// counter++;
 			return 1;
 		}
 		// column = Math.min(column, line - column);
@@ -95,12 +103,57 @@ public class Algorithm {
 		return recursivePascal(line - 1, column - 1) + recursivePascal(line - 1, column);
 	}
 
-	public static int[] recursivePascalLine(int line) {
-		int[] a = new int[line + 1];
+	public static long[] recursivePascalLine(int line) {
+		long[] a = new long[line + 1];
 		for (int i = 0; i <= line; i++) {
 			a[i] = recursivePascal(line, i);
 		}
 		return a;
 	}
 
+	public static long get(long[][] aa, int line, int column) {
+		if (column == 0 || column == line) {
+			return 1;
+		}
+		if (aa[line][column] == 0) {
+			counter++;
+			aa[line][column] = get(aa, line - 1, column) + get(aa, line - 1, column - 1);
+		}
+		return aa[line][column];
+	}
+
+	public static long[] getPascal(int line) {
+		a = new long[line + 1][line + 1];
+		for (int i = 0; i <= line; i++) {
+			a[line][i] = get(a, line, i);
+		}
+		return a[line];
+	}
+
+	public static long[] iterativePascal(int line) {
+		long[][] a = new long[line + 1][];
+		for (int i = 0; i < a.length; i++) {
+			a[i] = new long[i + 1];
+			a[i][0] = 1;
+			a[i][i] = 1;
+			counter += 3;
+		}
+		for (int i = 2; i < a.length; i++) {
+			for (int j = 1; j < i; j++) {
+				counter++;
+				a[i][j] = a[i - 1][j] + a[i - 1][j - 1];
+			}
+		}
+		return a[line];
+	}
+
+	public static long[] bestPascalEver(int line) {
+		long[] a = new long[line + 1];
+		a[0] = 1;
+		for (int i = 1; i < a.length; i++) {
+			counter++;
+			a[i] = a[i - 1] * (line - i + 1) / i;
+		}
+		return a;
+	}
 }
