@@ -7,6 +7,8 @@
  */
 package complexity;
 
+import java.util.Arrays;
+
 /**
  * @author Le
  * @author Nguyen
@@ -123,20 +125,22 @@ public class Algorithm {
 	}
 
 	public static long[] getPascal(int line) {
+		counter = 0;
 		a = new long[line + 1][line + 1];
 		for (int i = 0; i <= line; i++) {
 			a[line][i] = get(a, line, i);
 		}
+		System.out.format("%20s%10s%30s\n", "Rekursive Version", line, counter);
 		return a[line];
 	}
 
 	public static long[] iterativePascal(int line) {
+		counter = 0;
 		long[][] a = new long[line + 1][];
 		for (int i = 0; i < a.length; i++) {
 			a[i] = new long[i + 1];
 			a[i][0] = 1;
 			a[i][i] = 1;
-			counter += 3;
 		}
 		for (int i = 2; i < a.length; i++) {
 			for (int j = 1; j < i; j++) {
@@ -144,16 +148,20 @@ public class Algorithm {
 				a[i][j] = a[i - 1][j] + a[i - 1][j - 1];
 			}
 		}
+		System.out.format("%20s%10s%30s\n", "Iterative Version", line, counter);
 		return a[line];
 	}
 
-	public static long[] bestPascalEver(int line) {
+	public static long[] pascal(int line) {
+		counter = 0;
 		long[] a = new long[line + 1];
 		a[0] = 1;
 		for (int i = 1; i < a.length; i++) {
 			counter++;
 			a[i] = a[i - 1] * (line - i + 1) / i;
+			Arrays.sort(a);
 		}
+		System.out.format("%20s%10s%30s\n", "Schnellere Version", line, counter);
 		return a;
 	}
 }

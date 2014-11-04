@@ -70,5 +70,9 @@ public class Draft {
 		for (String string : sa) {
 			System.out.println(string);
 		}
+
+		int[][] ai = new int[10][10];
+		ai[5][6] = 20;
+		System.out.println(ai[5][6]);
 	}
 }
