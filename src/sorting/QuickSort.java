@@ -18,7 +18,7 @@ public class QuickSort implements Sort {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see sorting.Sort#sort(int[])
 	 */
 	@Override
@@ -34,7 +34,6 @@ public class QuickSort implements Sort {
 		int auf = links;
 		int ab = rechts;
 		int pivot = findPivot(a, links, rechts);
-
 		while (auf <= ab) {
 			counter++;
 			while (a[auf] < pivot) {
@@ -62,23 +61,24 @@ public class QuickSort implements Sort {
 		// return a[rechts];
 
 		// 2. Pivotsuchverfahren
-		int mitte = (links + rechts) / 2;
-		int min = links;
-		if (a[mitte] < a[min]) {
-			counter++;
-			min = mitte;
-		}
-		if (a[rechts] < a[min]) {
-			counter++;
-			min = rechts;
-		}
-		swap(a, links, min);
-		if (a[mitte] > a[rechts]) {
-			counter++;
-			swap(a, mitte, rechts);
-		}
-		return a[mitte];
+		// int mitte = (links + rechts) / 2;
+		// int min = links;
+		// if (a[mitte] < a[min]) {
+		// counter++;
+		// min = mitte;
+		// }
+		// if (a[rechts] < a[min]) {
+		// counter++;
+		// min = rechts;
+		// }
+		// swap(a, links, min);
+		// if (a[mitte] > a[rechts]) {
+		// counter++;
+		// swap(a, mitte, rechts);
+		// }
+		// return a[mitte];
 		// 3. Pivotsuchverfahren
+		return a[(int) (Math.random() * (rechts - links)) + links];
 	}
 
 	private void swap(int[] a, int i, int j) {
