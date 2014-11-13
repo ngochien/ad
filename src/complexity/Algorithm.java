@@ -7,7 +7,6 @@
  */
 package complexity;
 
-import java.util.Arrays;
 
 /**
  * @author Le
@@ -16,20 +15,11 @@ import java.util.Arrays;
 public class Algorithm {
 
 	private static long counter = 0;
-	private static long[][] a;
-
-	public static void reset() {
-		counter = 0;
-	}
-
-	public static long getCount() {
-		return counter;
-	}
 
 	public static void simpleTrialDivision(int n) {
 		boolean isPrime[] = new boolean[n];
 		int i, j;
-		int counter = 0;
+		counter = 0;
 		for (i = 0; i < n; i++) {
 			isPrime[i] = true;
 		}
@@ -47,7 +37,7 @@ public class Algorithm {
 	public static void improvedTrialDivision(int n) {
 		boolean isPrime[] = new boolean[n];
 		int i, j;
-		int counter = 0;
+		counter = 0;
 		for (i = 0; i < n; i++) {
 			isPrime[i] = true;
 		}
@@ -65,7 +55,7 @@ public class Algorithm {
 	public static void sieb(int n) {
 		boolean isPrime[] = new boolean[n];
 		int i, j;
-		int counter = 0;
+		counter = 0;
 		for (i = 0; i < n; i++) {
 			isPrime[i] = true;
 		}
@@ -81,7 +71,7 @@ public class Algorithm {
 	}
 
 	public static boolean isPrime(int n) {
-		int counter = 0;
+		counter = 0;
 		boolean result = true;
 		if (n > 2 && n % 2 == 0) {
 			result = false;
@@ -94,74 +84,5 @@ public class Algorithm {
 		}
 		System.out.format("%25s%20s%20s\n", "Primzahleigenschaft testen", n, counter);
 		return result;
-	}
-
-	public static long recursivePascal(int line, int column) {
-		if (column == 0 || column == line) {
-			return 1;
-		}
-		// column = Math.min(column, line - column);
-		counter++;
-		return recursivePascal(line - 1, column - 1) + recursivePascal(line - 1, column);
-	}
-
-	public static long[] recursivePascalLine(int line) {
-		long[] a = new long[line + 1];
-		for (int i = 0; i <= line; i++) {
-			a[i] = recursivePascal(line, i);
-		}
-		return a;
-	}
-
-	public static long get(long[][] aa, int line, int column) {
-		if (column == 0 || column == line) {
-			return 1;
-		}
-		if (aa[line][column] == 0) {
-			counter++;
-			aa[line][column] = get(aa, line - 1, column) + get(aa, line - 1, column - 1);
-		}
-		return aa[line][column];
-	}
-
-	public static long[] getPascal(int line) {
-		counter = 0;
-		a = new long[line + 1][line + 1];
-		for (int i = 0; i <= line; i++) {
-			a[line][i] = get(a, line, i);
-		}
-		System.out.format("%20s%10s%30s\n", "Rekursive Version", line, counter);
-		return a[line];
-	}
-
-	public static long[] iterativePascal(int line) {
-		counter = 0;
-		long[][] a = new long[line + 1][];
-		for (int i = 0; i < a.length; i++) {
-			a[i] = new long[i + 1];
-			a[i][0] = 1;
-			a[i][i] = 1;
-		}
-		for (int i = 2; i < a.length; i++) {
-			for (int j = 1; j < i; j++) {
-				counter++;
-				a[i][j] = a[i - 1][j] + a[i - 1][j - 1];
-			}
-		}
-		System.out.format("%20s%10s%30s\n", "Iterative Version", line, counter);
-		return a[line];
-	}
-
-	public static long[] pascal(int line) {
-		counter = 0;
-		long[] a = new long[line + 1];
-		a[0] = 1;
-		for (int i = 1; i < a.length; i++) {
-			counter++;
-			a[i] = a[i - 1] * (line - i + 1) / i;
-			Arrays.sort(a);
-		}
-		System.out.format("%20s%10s%30s\n", "Schnellere Version", line, counter);
-		return a;
 	}
 }

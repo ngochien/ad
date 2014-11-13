@@ -66,7 +66,7 @@ public class AlgorithmTest {
 			// System.out.println();
 			//
 			// Algorithm.reset();
-			Algorithm.pascal(h);
+			// Algorithm.binomial(h);
 			// // System.out.println(Long.MAX_VALUE);
 			// System.out.println("Schnellste: " + Algorithm.getCount());
 			// for (int i = 0; i < a3.length; i++) {

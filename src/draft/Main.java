@@ -12,9 +12,13 @@ package draft;
  */
 public class Main {
 
-	private static int getDigit(int i, int d) {
-		String s = String.valueOf(i);
-		return s.charAt(d) - '0';
+	private static int getDigit(long i, int n, int d) {
+		int x = 1;
+		for (int k = 1; k < n - d; k++) {
+			x *= 10;
+		}
+		long j = (i / x) % 10;
+		return (int) j;
 	}
 
 	/**
@@ -24,9 +28,9 @@ public class Main {
 		Unten u = new Unten();
 		u.methode();
 
-		int i = 789456;
-		for (int j = 0; j < 6; j++) {
-			System.out.println(getDigit(i, j));
+		int i = 12345678;
+		for (int j = 0; j < 8; j++) {
+			System.out.println(getDigit(i, 8, j));
 		}
 	}
 

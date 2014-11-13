@@ -12,79 +12,55 @@ package sorting;
  *
  * @author Le
  */
-public class QuickSort implements Sort {
+public class QuickSort<E extends Comparable<E>> implements Sort<E> {
 
-	private long counter;
+	private long counter = 0;
+	private Pivot<E> pivot;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sorting.Sort#sort(int[])
-	 */
-	@Override
-	public void sort(int[] a) {
-		sort(a, 0, a.length - 1);
-		System.out.format("%15s%30s\n", a.length, counter);
+	public QuickSort(Pivot<E> pivot) {
+		this.pivot = pivot;
 	}
 
-	private void sort(int[] a, int links, int rechts) {
-		if (links >= rechts) {
+	@Override
+	public void sort(E[] a) {
+		counter = 0;
+		sort(a, 0, a.length - 1);
+		System.out.format("%20s%30s\n", a.length, counter);
+	}
+
+	private void sort(E[] a, int startIndex, int endIndex) {
+		if (startIndex >= endIndex) {
 			return;
 		}
-		int auf = links;
-		int ab = rechts;
-		int pivot = findPivot(a, links, rechts);
-		while (auf <= ab) {
+		int rechts = startIndex;
+		int links = endIndex;
+		E pivotElement = pivot.get(a, startIndex, endIndex);
+		while (rechts <= links) {
 			counter++;
-			while (a[auf] < pivot) {
+			while (a[rechts].compareTo(pivotElement) < 0) {
 				counter++;
-				auf++;
+				rechts++;
 			}
-			while (a[ab] > pivot) {
+			while (a[links].compareTo(pivotElement) > 0) {
 				counter++;
-				ab--;
+				links--;
 			}
-			if (auf <= ab) {
+			if (rechts <= links) {
 				counter++;
-				swap(a, auf, ab);
-				auf++;
-				ab--;
+				swap(a, rechts, links);
+				rechts++;
+				links--;
 			}
 		}
 
-		sort(a, links, ab);
-		sort(a, auf, rechts);
+		sort(a, startIndex, links);
+		sort(a, rechts, endIndex);
 	}
 
-	public int findPivot(int[] a, int links, int rechts) {
-		// 1. Pivotsuchverfahren
-		// return a[rechts];
-
-		// 2. Pivotsuchverfahren
-		// int mitte = (links + rechts) / 2;
-		// int min = links;
-		// if (a[mitte] < a[min]) {
-		// counter++;
-		// min = mitte;
-		// }
-		// if (a[rechts] < a[min]) {
-		// counter++;
-		// min = rechts;
-		// }
-		// swap(a, links, min);
-		// if (a[mitte] > a[rechts]) {
-		// counter++;
-		// swap(a, mitte, rechts);
-		// }
-		// return a[mitte];
-		// 3. Pivotsuchverfahren
-		return a[(int) (Math.random() * (rechts - links)) + links];
-	}
-
-	private void swap(int[] a, int i, int j) {
+	private void swap(E[] a, int i, int j) {
 		if (i != j) {
 			counter++;
-			int tmp = a[i];
+			E tmp = a[i];
 			a[i] = a[j];
 			a[j] = tmp;
 		}

@@ -19,33 +19,55 @@ public class Sorting {
 	 */
 	public static void main(String[] args) {
 
-		System.out.format("%15s%45s\n", "n",
-				"Anzahl der Vergleiche und Swap-Operationen:");
+		System.out.println("                    QuickSort                    ");
+		System.out.println("-------------------------------------------------");
+		System.out.format("%20s%45s\n", "n", "Anzahl der Vergleiche und Swap-Operationen:");
 
 		System.out.println("Average Case: ");
-		for (int i = 5; i <= 1000000; i *= 10) {
-			QuickSort s = new QuickSort();
-			int[] a = new int[i];
+		System.out.println("\nZufaelliges Pivot-Element");
+		for (int i = 1; i <= 1000000; i *= 10) {
+			QuickSort<Integer> s = new QuickSort<>(new RandomPivot<Integer>());
+			Integer[] a = new Integer[i];
 			for (int j = 0; j < a.length; j++) {
 				a[j] = (int) (Math.random() * i);
 			}
 			s.sort(a);
 		}
 
-//		System.out.println("Worst Case: 1. Pivotsuchverfahren ");
-//		for (int i = 1; i <= 1000000; i *= 10) {
-//			QuickSort s = new QuickSort();
-//			int[] a = new int[i];
-//			for (int j = 0; j < a.length; j++) {
-//				a[j] = j;
-//			}
-//			s.sort(a);
-//		}
-
-		System.out.println("Best Case: 2. Pivotsuchverfahren");
+		System.out.println("\nLetztes Element als Pivot");
 		for (int i = 1; i <= 1000000; i *= 10) {
-			QuickSort s = new QuickSort();
-			int[] a = new int[i];
+			QuickSort<Integer> s = new QuickSort<>(new LastAsPivot<Integer>());
+			Integer[] a = new Integer[i];
+			for (int j = 0; j < a.length; j++) {
+				a[j] = (int) (Math.random() * i);
+			}
+			s.sort(a);
+		}
+
+		System.out.println("\nMedian von dem ersten, mittleren und letzten Element als Pivot");
+		for (int i = 1; i <= 1000000; i *= 10) {
+			QuickSort<Integer> s = new QuickSort<>(new LastAsPivot<Integer>());
+			Integer[] a = new Integer[i];
+			for (int j = 0; j < a.length; j++) {
+				a[j] = (int) (Math.random() * i);
+			}
+			s.sort(a);
+		}
+
+		System.out.println("Worst Case von \"Zufaelliges Pivot-Element\"");
+		for (int i = 1; i <= 10000; i *= 10) {
+			QuickSort<Integer> s = new QuickSort<>(new LastAsPivot<Integer>());
+			Integer[] a = new Integer[i];
+			for (int j = 0; j < a.length; j++) {
+				a[j] = j;
+			}
+			s.sort(a);
+		}
+
+		System.out.println("Best Case von \"Three-Median-Pivot\"");
+		for (int i = 1; i <= 1000000; i *= 10) {
+			QuickSort<Integer> s = new QuickSort<>(new ThreeMedianPivot<Integer>());
+			Integer[] a = new Integer[i];
 			for (int j = 0; j < a.length; j++) {
 				a[j] = j;
 			}
