@@ -28,9 +28,18 @@ public class Main {
 		Unten u = new Unten();
 		u.methode();
 
-		int i = 12345678;
+		int nn = 12345678;
 		for (int j = 0; j < 8; j++) {
-			System.out.println(getDigit(i, 8, j));
+			// System.out.println(getDigit(nn, 8, j));
+		}
+
+		long[] objs = new long[100];
+		int n = objs.length;
+		for (int i = 0; i < n; i++) {
+			objs[i] = (int) (Math.random() * (800 * n - 700 * n)) + 700 * n;
+		}
+		for (long i : objs) {
+			System.out.println(i);
 		}
 	}
 

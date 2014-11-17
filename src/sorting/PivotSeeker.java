@@ -12,7 +12,7 @@ package sorting;
  *
  * @author Le Nguyen
  */
-public interface Pivot<E extends Comparable<E>> {
+public interface PivotSeeker<T extends Comparable<T>> {
 
-	E get(E[] a, int startIndex, int endIndex);
+	T get(T[] a, int startIndex, int endIndex);
 }

@@ -12,7 +12,7 @@ package sorting;
  *
  * @author Le Nguyen
  */
-public interface Sort<E extends Comparable<E>> {
+public interface Sort<T extends Comparable<T>> {
 
-	void sort(E[] a);
+	void sort(T[] a);
 }

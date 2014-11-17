@@ -11,11 +11,20 @@ package sorting;
  *
  *
  * @author Le
+ * @param <T>
  */
-public class ThreeMedianPivot<E extends Comparable<E>> implements Pivot<E> {
+public class ThreeMedianPivot<T extends Comparable<T>> implements PivotSeeker<T> {
+
+	private void swap(T[] a, int i, int j) {
+		if (i != j) {
+			T tmp = a[i];
+			a[i] = a[j];
+			a[j] = tmp;
+		}
+	}
 
 	@Override
-	public E get(E[] a, int startIndex, int endIndex) {
+	public T get(T[] a, int startIndex, int endIndex) {
 		int mitte = (startIndex + endIndex) / 2;
 		int min = startIndex;
 		if (a[mitte].compareTo(a[min]) < 0) {
@@ -29,13 +38,5 @@ public class ThreeMedianPivot<E extends Comparable<E>> implements Pivot<E> {
 			swap(a, mitte, endIndex);
 		}
 		return a[mitte];
-	}
-
-	private void swap(E[] a, int i, int j) {
-		if (i != j) {
-			E tmp = a[i];
-			a[i] = a[j];
-			a[j] = tmp;
-		}
 	}
 }

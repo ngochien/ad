@@ -12,10 +12,10 @@ package sorting;
  *
  * @author Le
  */
-public class RandomPivot<E extends Comparable<E>> implements Pivot<E> {
+public class RandomPivot<T extends Comparable<T>> implements PivotSeeker<T> {
 
 	@Override
-	public E get(E[] a, int startIndex, int endIndex) {
+	public T get(T[] a, int startIndex, int endIndex) {
 		return a[(int) (Math.random() * (endIndex - startIndex)) + startIndex];
 	}
 
