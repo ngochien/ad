@@ -7,6 +7,8 @@
  */
 package sorting;
 
+import java.util.ArrayList;
+
 
 
 /**
@@ -24,9 +26,10 @@ public class SortCompetition {
 		int n = a.length;
 
 
-		intList[] blocks = new intList[n];
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer>[] blocks = new ArrayList[n];
 		for (int i = 0; i < n; i++) {
-			blocks[i] = new intList();
+			blocks[i] = new ArrayList<Integer>();
 			counter++;
 		}
 
@@ -42,8 +45,8 @@ public class SortCompetition {
 
 		int position = 0;
 		for (int i = 0; i < n; i++) {
-			while (blocks[i].head != null) {
-				a[position++] = blocks[i].removeFirst();
+			while (blocks[i].isEmpty() == false) {
+				a[position++] = blocks[i].remove(0);
 				counter++;
 			}
 			counter++;
