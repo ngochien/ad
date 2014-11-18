@@ -7,9 +7,6 @@
  */
 package sorting;
 
-import java.util.ArrayList;
-
-
 
 /**
  *
@@ -20,16 +17,63 @@ public class SortCompetition {
 
 	private static long counter = 0;
 
+	public static void mSort(int[] a) {
+		int[] count = new int[a.length + 1];
+		int[] aux = new int[a.length];
+
+		// counting
+		for (int i = 0; i < a.length; i++) {
+			int x = (a[i] - 700 * a.length) / 100;
+			if (x == a.length) {
+				x--;
+			}
+			count[x + 1]++;
+		}
+
+		// compute index from count[]
+		for (int i = 0; i < count.length - 1; i++) {
+			count[i + 1] += count[i];
+		}
+
+		// for (int i : a) {
+		// System.out.print(i + " - ");
+		// }
+		// System.out.println();
+
+		// distribute to aux[]
+		for (int i = 0; i < a.length; i++) {
+			int x = (a[i] - 700 * a.length) / 100;
+			if (x == a.length) {
+				x--;
+			}
+			aux[count[x]++] = a[i];
+		}
+
+		// for (int i : aux) {
+		// System.out.print(i + " - ");
+		// }
+		// System.out.println();
+
+		// copy back
+		for (int i = 0; i < a.length; i++) {
+			a[i] = aux[i];
+		}
+
+		insertionSort(a, 0, a.length - 1);
+		// for (int i : a) {
+		// System.out.print(i + " - ");
+		// }
+		// System.out.println();
+	}
+
 	public static void mixedSort(int[] a) {
 		counter = 0;
 
 		int n = a.length;
 
-
-		@SuppressWarnings("unchecked")
-		ArrayList<Integer>[] blocks = new ArrayList[n];
+		intList[] blocks = new intList[n];
 		for (int i = 0; i < n; i++) {
-			blocks[i] = new ArrayList<Integer>();
+			blocks[i] = new intList();
 			counter++;
 		}
 
@@ -45,14 +89,24 @@ public class SortCompetition {
 
 		int position = 0;
 		for (int i = 0; i < n; i++) {
-			while (blocks[i].isEmpty() == false) {
-				a[position++] = blocks[i].remove(0);
+			while (blocks[i].head != null) {
+				a[position++] = blocks[i].removeFirst();
 				counter++;
 			}
 			counter++;
 		}
 
 		// Insertion sort over the whole array
+		// insertionSort(a, 0, n - 1);
+
+		// int l = 0;
+		// int r = 0;
+		// for (int i = 0; i < n; i++) {
+		// r = l + blocks[i].size - 1;
+		// insertionSort(a, l, r);
+		// l = r + 1;
+		// }
+
 		for (int i = 0; i < n - 1; i++) {
 			int tmp = a[i + 1];
 			int j = i;
@@ -65,17 +119,32 @@ public class SortCompetition {
 			counter++;
 		}
 
-		System.out.format("%10s%20s%30s\n", "MixedSort:", n, counter);
+		// System.out.format("%10s%20s%30s\n", "MixedSort:", n, counter);
+	}
+
+	private static void insertionSort(int[] a, int l, int r) {
+		for (int i = l; i <= r - 1; i++) {
+			int tmp = a[i + 1];
+			int j = i;
+			while (j >= 0 && tmp < a[j]) {
+				a[j + 1] = a[j];
+				j--;
+				counter++;
+			}
+			a[j + 1] = tmp;
+			counter++;
+		}
 	}
 
 	public static void quickSort(int[] a) {
 		counter = 0;
 		quickSort(a, 0, a.length - 1);
-		System.out.format("%10s%20s%30s\n", "QuickSort:", a.length, counter);
+		// System.out.format("%10s%20s%30s\n", "QuickSort:", a.length, counter);
 	}
 
 	private static void quickSort(int[] a, int startIndex, int endIndex) {
 		if (startIndex >= endIndex) {
+			// insertionSort(a, startIndex, endIndex);
 			return;
 		}
 		int rechts = startIndex;
@@ -116,7 +185,7 @@ public class SortCompetition {
 	public static void radixSort(int[] a) {
 		counter = 0;
 		radixSort(a, (int) Math.log10(a.length));
-		System.out.format("%10s%20s%30s\n", "RadixSort:", a.length, counter);
+		// System.out.format("%10s%20s%30s\n", "RadixSort:", a.length, counter);
 	}
 
 	private static void radixSort(int[] a, int k) {
@@ -178,7 +247,7 @@ public class SortCompetition {
 		int removeFirst() {
 			int x = head.key;
 			head = head.next;
-			size--;
+			// size--;
 			return x;
 		}
 

@@ -21,7 +21,8 @@ import org.junit.Test;
  */
 public class SortCompetitionTest {
 
-	private static int n = 10000;
+	private static int n = 1000000;
+	private static int[] m = new int[n];
 	private static int[] mixed = new int[n];
 	private static int[] radix = new int[n];
 	private static int[] quick = new int[n];
@@ -34,6 +35,7 @@ public class SortCompetitionTest {
 	public static void setUpBeforeClass() throws Exception {
 		for (int i = 0; i < n; i++) {
 			int x = (int) (Math.random() * 100 * n + 700 * n + 1);
+			m[i] = x;
 			mixed[i] = x;
 			radix[i] = x;
 			quick[i] = x;
@@ -52,6 +54,19 @@ public class SortCompetitionTest {
 		Arrays.sort(copy);
 
 		assertTrue(Arrays.equals(mixed, copy));
+	}
+
+	/**
+	 * Test method for {@link sorting.SortCompetition#mixedSort(int[])}.
+	 */
+	@Test
+	public void testMSort() {
+		int[] copy = Arrays.copyOf(m, n);
+
+		SortCompetition.mSort(m);
+		Arrays.sort(copy);
+
+		assertTrue(Arrays.equals(m, copy));
 	}
 
 	@Test
