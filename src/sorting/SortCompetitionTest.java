@@ -21,72 +21,64 @@ import org.junit.Test;
  */
 public class SortCompetitionTest {
 
-	private static int n = 1000000;
-	private static int[] m = new int[n];
-	private static int[] mixed = new int[n];
-	private static int[] radix = new int[n];
-	private static int[] quick = new int[n];
-	private static int[] system = new int[n];
+	private static int NUMBER_OF_OBJECTS = 10_00_00;
+
+	private static int[] a1 = new int[NUMBER_OF_OBJECTS];
+	private static int[] a2 = new int[NUMBER_OF_OBJECTS];
+	private static int[] a3 = new int[NUMBER_OF_OBJECTS];
+	private static int[] a4 = new int[NUMBER_OF_OBJECTS];
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		for (int i = 0; i < n; i++) {
-			int x = (int) (Math.random() * 100 * n + 700 * n + 1);
-			m[i] = x;
-			mixed[i] = x;
-			radix[i] = x;
-			quick[i] = x;
-			system[i] = x;
+		for (int i = 0; i < NUMBER_OF_OBJECTS; i++) {
+			int randomNumber = (int) (Math.random() * 100 * NUMBER_OF_OBJECTS + 700 * NUMBER_OF_OBJECTS + 1);
+			a1[i] = randomNumber;
+			a2[i] = randomNumber;
+			a3[i] = randomNumber;
+			a4[i] = randomNumber;
 		}
 	}
 
-	/**
-	 * Test method for {@link sorting.SortCompetition#mixedSort(int[])}.
-	 */
 	@Test
-	public void testMixedSort() {
-		int[] copy = Arrays.copyOf(mixed, n);
+	public void testBlockSort() {
+		int[] copy = Arrays.copyOf(a1, NUMBER_OF_OBJECTS);
 
-		SortCompetition.mixedSort(mixed);
+		SortCompetition.blockSort(a1);
 		Arrays.sort(copy);
 
-		assertTrue(Arrays.equals(mixed, copy));
-	}
-
-	/**
-	 * Test method for {@link sorting.SortCompetition#mixedSort(int[])}.
-	 */
-	@Test
-	public void testMSort() {
-		int[] copy = Arrays.copyOf(m, n);
-
-		SortCompetition.mSort(m);
-		Arrays.sort(copy);
-
-		assertTrue(Arrays.equals(m, copy));
+		assertTrue(Arrays.equals(a1, copy));
 	}
 
 	@Test
 	public void testQuickSort() {
-		int[] copy = Arrays.copyOf(quick, n);
+		int[] copy = Arrays.copyOf(a2, NUMBER_OF_OBJECTS);
 
-		SortCompetition.quickSort(quick);
+		SortCompetition.quickSort(a2);
 		Arrays.sort(copy);
 
-		assertTrue(Arrays.equals(quick, copy));
+		assertTrue(Arrays.equals(a2, copy));
+	}
+
+	@Test
+	public void testInsertionSort() {
+		int[] copy = Arrays.copyOf(a3, NUMBER_OF_OBJECTS);
+
+		SortCompetition.insertionSort(a3);
+		Arrays.sort(copy);
+
+		assertTrue(Arrays.equals(a3, copy));
 	}
 
 	@Test
 	public void testRadixSort() {
-		int[] copy = Arrays.copyOf(radix, n);
+		int[] copy = Arrays.copyOf(a4, NUMBER_OF_OBJECTS);
 
-		SortCompetition.radixSort(radix);
+		SortCompetition.radixSort(a4);
 		Arrays.sort(copy);
 
-		assertTrue(Arrays.equals(radix, copy));
+		assertTrue(Arrays.equals(a4, copy));
 	}
-
 }

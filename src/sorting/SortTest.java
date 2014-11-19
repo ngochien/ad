@@ -121,7 +121,7 @@ public class SortTest {
 
 		// Den Original-Array mit QuickSort sortieren
 		// new MixedSort().sort(a);
-		SortCompetition.mixedSort(a);
+		// SortCompetition.mixedSort(a);
 
 		// Den Kopie-Array mit Java-Bibliothek soriteren
 		Arrays.sort(aCopy);
