@@ -15,38 +15,39 @@ package sorting;
 public class SortCompetition {
 
 	public static void blockSort(int[] a) {
-		int[] count = new int[a.length + 1];
-		int[] aux = new int[a.length];
+		int n = a.length;
+		int[] count = new int[n + 1];
+		int[] temp = new int[n];
 
 		// counting
-		for (int i = 0; i < a.length; i++) {
-			int x = (a[i] - 700 * a.length) / 100;
-			if (x == a.length) {
-				x--;
+		for (int i = 0; i < n; i++) {
+			int blockIndex = (a[i] - 700 * n) / 100;
+			if (blockIndex == n) {
+				blockIndex--;
 			}
-			count[x + 1]++;
+			count[blockIndex + 1]++;
 		}
 
 		// compute index from count[]
-		for (int i = 0; i < count.length - 1; i++) {
+		for (int i = 0; i < n; i++) {
 			count[i + 1] += count[i];
 		}
 
-		// distribute to aux[]
-		for (int i = 0; i < a.length; i++) {
-			int x = (a[i] - 700 * a.length) / 100;
-			if (x == a.length) {
-				x--;
+		// distribute to temp[]
+		for (int i = 0; i < n; i++) {
+			int blockIndex = (a[i] - 700 * n) / 100;
+			if (blockIndex == n) {
+				blockIndex--;
 			}
-			aux[count[x]++] = a[i];
+			temp[count[blockIndex]++] = a[i];
 		}
-
+		
+		insertionSort(temp);
+		
 		// copy back
 		for (int i = 0; i < a.length; i++) {
-			a[i] = aux[i];
+			a[i] = temp[i];
 		}
-
-		insertionSort(a, 0, a.length - 1);
 	}
 
 	public static void insertionSort(int[] a) {

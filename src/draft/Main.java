@@ -21,6 +21,13 @@ public class Main {
 		return (int) j;
 	}
 
+	private static void badSwap(int a, int b) {
+//		System.out.println(a + " " + b);
+		int tmp = a;
+		a = b;
+		b  = tmp;
+		
+	}
 	/**
 	 * @param args
 	 */
@@ -41,6 +48,10 @@ public class Main {
 		for (long i : objs) {
 			System.out.println(i);
 		}
+		int a = 10; int b = 20;
+		System.out.println("Pass by what?");
+		badSwap(a, b);
+		System.out.println(a + " " + b);
 	}
 
 }
