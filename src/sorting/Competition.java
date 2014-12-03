@@ -60,13 +60,11 @@ public class Competition {
 				// System.out.println(Arrays.equals(a1, a2));
 			}
 
-			System.out.println(average(runtimeQuickSort));
-			System.out.println(average(runtimeBlockSort));
-//			System.out.format("%10s%20s%30s\n", "QuickSort", numOfObjects,
-//					average(runtimeQuickSort));
-//			System.out.format("%10s%20s%30s\n", "BlockSort", numOfObjects,
-//					average(runtimeBlockSort));
-//			System.out.println("----------------------------------------------------------------");
+			// System.out.println(average(runtimeQuickSort));
+			// System.out.println(average(runtimeBlockSort));
+			System.out.format("%10s%20s%30s\n", "QuickSort", numOfObjects, average(runtimeQuickSort));
+			System.out.format("%10s%20s%30s\n", "BlockSort", numOfObjects, average(runtimeBlockSort));
+			System.out.println("----------------------------------------------------------------");
 		}
 	}
 
