@@ -72,7 +72,8 @@ public class IntegerBST {
 	/**
 	 * @param min
 	 * @param max
-	 * @return
+	 * @return sum of all values in this bst that are greater than (or equal to) min
+	 * 			AND less than (or equal to) max.
 	 */
 	public int sum(int min, int max) {
 		if (root == null) {
