@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tree;
+package a09;
 
 /**
  * @author le
@@ -10,9 +10,8 @@ package tree;
 public class IntegerBST {
 
 	private static class IntegerNode {
-		int value;
-		int sum;
-		IntegerNode left, right, parent;
+		int value, sum;
+		IntegerNode left, right;
 
 		IntegerNode(int value) {
 			// assert value >= 0
@@ -20,7 +19,6 @@ public class IntegerBST {
 			this.sum = value;
 			this.left = null;
 			this.right = null;
-			this.parent = null;
 		}
 	}
 
@@ -45,6 +43,11 @@ public class IntegerBST {
 		return node == null ? 0 : node.sum;
 	}
 
+	/**
+	 * Insert the specified value into this BST.
+	 * 
+	 * @param value
+	 */
 	public void insert(int value) {
 		root = insert(root, value);
 	}
@@ -54,17 +57,11 @@ public class IntegerBST {
 			root = new IntegerNode(value);
 			return root;
 		}
-
+		
 		if (value < root.value) {
 			root.left = insert(root.left, value);
-			if (root.left.parent == null) {
-				root.left.parent = root;
-			}
 		} else if (value > root.value) {
 			root.right = insert(root.right, value);
-			if (root.right.parent == null) {
-				root.right.parent = root;
-			}
 		}
 
 		root.sum = root.value + sum(root.left) + sum(root.right);
@@ -72,6 +69,11 @@ public class IntegerBST {
 		return root;
 	}
 
+	/**
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	public int sum(int min, int max) {
 		if (root == null) {
 			return 0;
@@ -89,30 +91,27 @@ public class IntegerBST {
 			return 0;
 		}
 
-		System.out.println("Min " + minNode.value + " Max " + maxNode.value);
-
-		IntegerNode lca = getLCA(root, minNode, maxNode);
-		System.out.println("LCA " + lca.value);
+		IntegerNode lca = LCA(root, minNode, maxNode);
 
 		int sum = sum(lca) - sum(minNode.left) - sum(maxNode.right);
 
-		IntegerNode lessAncestor = lca;
-		while (lessAncestor.value != minNode.value) {
-			if (minNode.value < lessAncestor.value) {
-				lessAncestor = lessAncestor.left;
-			} else if (minNode.value > lessAncestor.value) {
-				sum = sum - sum(lessAncestor.left) - lessAncestor.value;
-				lessAncestor = lessAncestor.right;
+		IntegerNode lessParent = lca;
+		while (lessParent.value != minNode.value) {
+			if (lessParent.value > minNode.value) {
+				lessParent = lessParent.left;
+			} else if (lessParent.value < minNode.value) {
+				sum = sum - sum(lessParent.left) - lessParent.value;
+				lessParent = lessParent.right;
 			}
 		}
 		
-		IntegerNode greaterAncestor = lca;
-		while (greaterAncestor.value != maxNode.value) {
-			if (maxNode.value > greaterAncestor.value) {
-				greaterAncestor = greaterAncestor.right;
-			} else if (maxNode.value < greaterAncestor.value) {
-				sum = sum - sum(greaterAncestor.right) - greaterAncestor.value;
-				greaterAncestor = greaterAncestor.left;
+		IntegerNode greaterParent = lca;
+		while (greaterParent.value != maxNode.value) {
+			if (greaterParent.value < maxNode.value) {
+				greaterParent = greaterParent.right;
+			} else if (greaterParent.value > maxNode.value) {
+				sum = sum - sum(greaterParent.right) - greaterParent.value;
+				greaterParent = greaterParent.left;
 			}
 		}
 
@@ -120,10 +119,10 @@ public class IntegerBST {
 	}
 
 	/**
-	 * Suchen von a_m
+	 * <Suchen von a_m>
 	 *
-	 * Get the node n with the smallest value that greater than or equal to the
-	 * given value x. That is, n.value = min({n'.value | n'.value >= x})
+	 * Returns the node n with the smallest value that greater than or equal to the
+	 * given value x (n.value = min({n'.value | n'.value >= x}))
 	 */
 	private IntegerNode ceiling(IntegerNode root, int x) {
 		// assert x >= 0 && root != null
@@ -145,10 +144,10 @@ public class IntegerBST {
 	}
 
 	/**
-	 * Suchen von a_M
+	 * <Suchen von a_M>
 	 * 
-	 * Get the node n with the largest value that less than or equal to the
-	 * given value x. That is, n.value = max({n'.value | n'.value <= x})
+	 * Returns the node n with the largest value that less than or equal to the
+	 * given value x (n.value = max({n'.value | n'.value <= x}))
 	 */
 	private IntegerNode floor(IntegerNode root, int x) {
 		// assert x >= 0 && root != null
@@ -170,9 +169,9 @@ public class IntegerBST {
 	}
 
 	/**
-	 * Get the LCA-Node of the two given nodes.
+	 * Returns the LCA-Node of the two given nodes.
 	 */
-	private IntegerNode getLCA(IntegerNode root, IntegerNode x, IntegerNode y) {
+	private IntegerNode LCA(IntegerNode root, IntegerNode x, IntegerNode y) {
 		// assert x, y are on this tree && root != null
 		if (root == null) {
 			return null;
@@ -182,9 +181,9 @@ public class IntegerBST {
 				|| (root.value >= y.value && root.value <= x.value)) {
 			return root;
 		} else if (root.value > x.value && root.value > y.value) {
-			return getLCA(root.left, x, y);
+			return LCA(root.left, x, y);
 		} else if (root.value < x.value && root.value < y.value) {
-			return getLCA(root.right, x, y);
+			return LCA(root.right, x, y);
 		} else {
 			throw new IllegalStateException("This line should never be reached");
 		}

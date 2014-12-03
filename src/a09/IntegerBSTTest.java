@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tree;
+package a09;
 
 import static org.junit.Assert.*;
 
@@ -50,7 +50,7 @@ public class IntegerBSTTest {
 	}
 
 	/**
-	 * Test method for {@link tree.IntegerBST#IntegerBST()}.
+	 * Test method for {@link a09.IntegerBST#IntegerBST()}.
 	 */
 	@Test
 	public void testIntegerBST() {;
@@ -58,7 +58,7 @@ public class IntegerBSTTest {
 	}
 
 	/**
-	 * Test method for {@link tree.IntegerBST#insert(int)}.
+	 * Test method for {@link a09.IntegerBST#insert(int)}.
 	 */
 	@Test
 	public void testInsert() {
@@ -222,18 +222,18 @@ public class IntegerBSTTest {
 		assertEquals(bst.sum(8, 7), 15);
 		assertEquals(bst.sum(2, 3), 5);
 		assertEquals(bst.sum(2, 6), 20);
-		assertEquals(bst.sum(5, 9), 35);
+		assertEquals(bst.sum(-5, 9), 45);
 		assertEquals(bst.sum(14, 11), 50);
 		assertEquals(bst.sum(3, 9), 42);
 		assertEquals(bst.sum(11, 8), 38);
 		assertEquals(bst.sum(16, 18), 16);
-		assertEquals(bst.sum(16, 1), 136);
+		assertEquals(bst.sum(16, -1), 136);
 		assertEquals(bst.sum(9, 8), 17);
 	}
 	
 	@Test
 	public void testRuntime() {
-		for (int i = 0; i < Integer.MAX_VALUE; i++) {
+		for (int i = 0; i < 10000000; i++) {
 			bst.insert((int) (Math.random() * Integer.MAX_VALUE + 1));
 		}
 		
