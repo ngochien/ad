@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representation of a generic (unordered) graph.
+ * Representation of a generic (unordered) graph. Parallel edges are not allowed. Only the first inserted edge is taken into account
  *
  * @author Philipp Jenke
  *

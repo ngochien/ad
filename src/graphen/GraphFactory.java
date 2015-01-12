@@ -21,10 +21,10 @@ public class GraphFactory {
 		Knoten<Integer> start = graph.getKnoten((int) (Math.random() * vertices));
 		Knoten<Integer> end = graph.getKnoten((int) Math.random() * vertices);
 		for (int edge = 0; edge < edges; edge++) {			
-			while (graph.kanteExistiert(start, end)) {
-				start = graph.getKnoten((int) (Math.random() * vertices));
-				end = graph.getKnoten((int) (Math.random() * vertices));
-			}
+//			while (graph.kanteExistiert(start, end)) {
+//				start = graph.getKnoten((int) (Math.random() * vertices));
+//				end = graph.getKnoten((int) (Math.random() * vertices));
+//			}
 			graph.addKante(start, end, Math.random());
 		}
 		return graph;

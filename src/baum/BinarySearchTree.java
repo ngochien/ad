@@ -10,7 +10,7 @@ package baum;
 /**
  *
  *
- * @author Le
+ * @author Le, Nguyen
  */
 public interface BinarySearchTree<T extends Comparable<T>> {
 

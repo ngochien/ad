@@ -21,7 +21,7 @@ public class Competition {
 	public static void main(String[] args) {
 
 		final int MAX_NUMBER_OF_OBJECTS = 1_00_00_00;
-		final int NUMBER_OF_TESTS = 100;
+		final int NUMBER_OF_TESTS = 50;
 		final int MIN_KEY_FACTOR = 700;
 		final int MAX_KEY_FACTOR = 800;
 

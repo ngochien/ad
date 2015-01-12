@@ -4,7 +4,7 @@
 package a09;
 
 /**
- * @author le
+ * @author le, nguyen
  *
  */
 public class Test {
@@ -13,6 +13,8 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("#Knoten" + "              " + "Laufzeit in nanosecs");
+		
 		IntegerBST tree = new IntegerBST();
 		for (int i = 10; i <= 1000000; i *= 10) {
 			for (int j = 0; j < i; j++) {
@@ -22,6 +24,7 @@ public class Test {
 			tree.sum(0, Integer.MAX_VALUE);
 			long end = System.nanoTime();
 			long time = end-start;
+			
 			System.out.println(i + "                    " + time);
 		}
 

@@ -10,7 +10,7 @@ package baum;
 /**
  *
  *
- * @author Le
+ * @author Le, Nguyen
  */
 public class StaticBST<T extends Comparable<T>> implements BinarySearchTree<T> {
 
@@ -37,7 +37,7 @@ public class StaticBST<T extends Comparable<T>> implements BinarySearchTree<T> {
 	@SuppressWarnings("unchecked")
 	private void insert(int rootIndex, T data) {
 		if (rootIndex >= elements.length) {
-			throw new IndexOutOfBoundsException("Der Baum ist voll");
+			throw new IndexOutOfBoundsException("...");
 		}
 
 		if (elements[rootIndex] == null) {

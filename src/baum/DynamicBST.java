@@ -10,11 +10,11 @@ package baum;
 /**
  *
  *
- * @author Le
+ * @author Le, Nguyen
  */
 public class DynamicBST<T extends Comparable<T>> implements BinarySearchTree<T> {
 
-	private class Node<E> {
+	private static class Node<E> {
 		private E data;
 		private Node<E> left;
 		private Node<E> right;

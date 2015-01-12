@@ -4,7 +4,7 @@
 package a09;
 
 /**
- * @author le
+ * @author le, nguyen
  *
  */
 public class IntegerBST {

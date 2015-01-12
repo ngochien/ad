@@ -233,11 +233,11 @@ public class IntegerBSTTest {
 	
 	@Test
 	public void testRuntime() {
-		for (int i = 0; i < 10000000; i++) {
+		for (int i = 0; i < 1000; i++) {
 			bst.insert((int) (Math.random() * Integer.MAX_VALUE + 1));
 		}
 		
 		assertFalse(bst.isEmpty());
-		System.out.println(bst.sum(0, 10));
+//		System.out.println(bst.sum(0, 10));
 	}
 }
