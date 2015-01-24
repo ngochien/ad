@@ -53,10 +53,10 @@ public class Optimizer {
 		int yes = recursive(numOfChoices - 1, capital - stocks[numOfChoices].price)
 					+ stocks[numOfChoices].value();
 		if (yes >= no) {
-			choosen.add(stocks[numOfChoices-1]);
+			choosen.add(stocks[numOfChoices]);
 			
 		} else {
-			choosen.remove(stocks[numOfChoices-1]);
+			choosen.remove(stocks[numOfChoices]);
 		}
 
 		return Math.max(yes, no);
