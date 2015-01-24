@@ -25,17 +25,17 @@ public class Runtime {
 			capital = i / 10;
 			opt = new Optimizer(Runtime.stocks(i, capital));
 
-			// long startRecursive = System.nanoTime();
-			// opt.recursive(i - 1, capital);
-			// long endRecursive = System.nanoTime();
-			// System.out.print(opt.rcounter + "          " + i);
-			// System.out.println();
+			 long startRecursive = System.nanoTime();
+			 opt.recursive(i - 1, capital);
+			 long endRecursive = System.nanoTime();
+			 System.out.print(opt.rcounter + "          " + i);
+			 System.out.println();
 
-			long startDynamic = System.nanoTime();
-			opt.dynamic(i, capital);
-			long endDynamic = System.nanoTime();
-			System.out.print(i + "     " + opt.dcounter);
-			System.out.println();
+//			long startDynamic = System.nanoTime();
+//			opt.dynamic(i, capital);
+//			long endDynamic = System.nanoTime();
+//			System.out.print(i + "     " + opt.dcounter);
+//			System.out.println();
 		}
 	}
 

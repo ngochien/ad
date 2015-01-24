@@ -33,4 +33,8 @@ public class Stock {
 	public int value() {
 		return (int) (price + price * performance);
 	}
+	
+	public boolean equals(Object obj) {
+		return this.name.equals(((Stock)obj).name);
+	}
 }

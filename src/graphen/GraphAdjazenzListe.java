@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representation of a generic (unordered) graph. Parallel edges are not allowed. Only the first inserted edge is taken into account
+ * Representation of a generic (unordered) graph. Parallel edges are not
+ * allowed. Only the first inserted edge is taken into account
  *
  * @author Philipp Jenke
  *
@@ -168,8 +169,8 @@ public class GraphAdjazenzListe<T> implements IGraph<T> {
 	}
 
 	@Override
-	public void setzeGewicht(Knoten<String> startKnoten,
-			Knoten<String> zielKnoten, double gewicht) {
+	public void setzeGewicht(Knoten<T> startKnoten, Knoten<T> zielKnoten,
+			double gewicht) {
 
 		int indexStartKnoten = knoten.indexOf(startKnoten);
 		int indexZielKnoten = knoten.indexOf(zielKnoten);

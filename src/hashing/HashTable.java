@@ -6,7 +6,7 @@ package hashing;
 import java.util.LinkedList;
 
 /**
- * @author le
+ * @author 
  *
  */
 public class HashTable {
@@ -36,11 +36,11 @@ public class HashTable {
 				return pair.getValue();
 			}
 		}
-		System.out.println(counter + " miss");
+		System.out.println(counter + " not found");
 		return null;
  	}
 	
 	private int hash(String key) {
-		return (key.hashCode() & 0x7fffffff) % hashTable.length;
+		return Math.abs(key.hashCode()) % hashTable.length;
 	}
 }

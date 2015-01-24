@@ -5,7 +5,7 @@ package graphen;
  */
 
 /**
- * @author le
+ * @author 
  *
  */
 public class Dijkstra<T> {
@@ -13,10 +13,8 @@ public class Dijkstra<T> {
 	private Knoten<T>[] predecessors;
 	private double[] costs;
 	private boolean[] marked;
-	private KeyValueBST<Integer, Double> r; // Die Randmenge R - Irgendeine
-											// Datenstruktur, die Methode zum
-											// Löschen des kleinsten Elements
-											// bietet.
+	/* Die Randmenge R - eine Datenstruktur, die Methode zum Löschen des kleinsten Elements bietet */
+	private KeyValueBST<Integer, Double> r;
 
 	@SuppressWarnings("unchecked")
 	public Dijkstra(IGraph<T> graph, int source) {
@@ -38,10 +36,11 @@ public class Dijkstra<T> {
 		}
 
 		while (!r.isEmpty()) {
-			int v = r.deleteMin(); // entferne den Knoten mit dem
-									// minimalen-Kosten zu source und return
-									// dessen key zurück
+			int v = r.deleteMin();
+			/* entferne den Knoten mit dem  minimalen-Kosten zu source und return dessen key zurück */
 			marked[v] = true;
+			
+			// kosten aktualisieren
 			for (int k : graph.getNachbarIndices(v)) {
 				if (!marked[k]) {
 					if (costs[k] > costs[v] + graph.getKantenGewicht(v, k)) {
@@ -52,7 +51,7 @@ public class Dijkstra<T> {
 				/*
 				 * TODO: für jeden dieser Knoten κ finde heraus, ob κ.cost >
 				 * ν.cost + c(ν, κ). Wenn dem so ist, dann setze κ.cost = ν.cost
-				 * + c(ν, κ) und κ.pred = ν. 3. nimm κ in R mit auf.
+				 * + c(ν, κ) und κ.pred = ν, nimm κ in R mit auf.
 				 */
 			}
 		}

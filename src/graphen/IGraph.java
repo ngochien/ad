@@ -73,8 +73,8 @@ public interface IGraph<T> {
 	/**
 	 * Setzen des Wertes des Gewichts der Kanten zwischen den beiden Knoten.
 	 */
-	public void setzeGewicht(Knoten<String> startKnoten,
-			Knoten<String> zielKnoten, double gewicht);
+	public void setzeGewicht(Knoten<T> startKnoten,
+			Knoten<T> zielKnoten, double gewicht);
 
 	/**
 	 * Liefert wahr, falls die Kante bereits im Graphen ist, ansonsten falsch.
