@@ -25,21 +25,20 @@ public class Runtime {
 			capital = i / 10;
 			opt = new Optimizer(Runtime.stocks(i, capital));
 
-			 long startRecursive = System.nanoTime();
-			 opt.recursive(i - 1, capital);
-			 long endRecursive = System.nanoTime();
-			 System.out.print(opt.rcounter + "          " + i);
-			 System.out.println();
+			opt.printRecursive(capital);
 
-//			long startDynamic = System.nanoTime();
-//			opt.dynamic(i, capital);
-//			long endDynamic = System.nanoTime();
-//			System.out.print(i + "     " + opt.dcounter);
-//			System.out.println();
+			// long startDynamic = System.nanoTime();
+			// opt.dynamic(i, capital);
+			// long endDynamic = System.nanoTime();
+			// System.out.print(i + "     " + opt.dcounter);
+			// System.out.println();
 		}
 	}
 
-	/** generate randomly n stocks. maxPrice should be less than or equal to capital! */
+	/**
+	 * generate randomly n stocks. maxPrice should be less than or equal to
+	 * capital!
+	 */
 	public static Stock[] stocks(int n, int maxPrice) {
 		Stock[] stocks = new Stock[n];
 

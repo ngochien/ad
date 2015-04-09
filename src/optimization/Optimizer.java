@@ -78,17 +78,13 @@ public class Optimizer {
 	public void printDynamic(int numOfChoices, int capital) {
 		List<Stock> choosen = new LinkedList<>();
 		int[][] matrix = new int[numOfChoices + 1][capital + 1];
-		for (int currentObjNr = 1; currentObjNr <= numOfChoices; currentObjNr++) {
-			for (int currentCapital = 0; currentCapital <= capital; currentCapital++) {
-				matrix[currentObjNr][currentCapital] = matrix[currentObjNr - 1][currentCapital];
-				if (stocks[currentObjNr - 1].price <= currentCapital) {
-					if (matrix[currentObjNr][currentCapital] < matrix[currentObjNr - 1][currentCapital
-							- stocks[currentObjNr - 1].price]
-							+ stocks[currentObjNr - 1].value()) {
-						matrix[currentObjNr][currentCapital] = matrix[currentObjNr - 1][currentCapital
-								- stocks[currentObjNr - 1].price]
-								+ stocks[currentObjNr - 1].value();
-						choosen.add(stocks[currentObjNr - 1]);
+		for (int i = 1; i <= numOfChoices; i++) {
+			for (int j = 0; j <= capital; j++) {
+				matrix[i][j] = matrix[i - 1][j];
+				if (stocks[i - 1].price <= j) {
+					if (matrix[i][j] < matrix[i - 1][j - stocks[i - 1].price] + stocks[i - 1].value()) {
+						matrix[i][j] = matrix[i - 1][j - stocks[i - 1].price] + stocks[i - 1].value();
+						choosen.add(stocks[i - 1]);
 					}
 				}
 			}
